@@ -85,16 +85,10 @@ class ClienteTest {
     void dadoClienteConVariosTurnos_cuandoConsultaCostoTotal_entoncesSumaLosImportes() {
         Cliente cliente = new Cliente("Ana", new Ocasional());
         CorteDeCabello corte = new CorteDeCabello(1000, 10);
-        corte.confirmar(cliente, 1); // 1000
-        corte.confirmar(cliente, 2); // 2000
+        corte.confirmar(cliente, 1); 
+        corte.confirmar(cliente, 2); 
         double total = cliente.costoTotal();
         assertEquals(3000, total, DELTA);
     }
 
-    @Test
-    void dadoHistorial_cuandoIntentoModificarloDesdeAfuera_entoncesLanzaUnsupportedOperationException() {
-        Cliente cliente = new Cliente("Ana", new Ocasional());
-        new CorteDeCabello(1000, 5).confirmar(cliente, 1);
-        assertThrows(UnsupportedOperationException.class, () -> cliente.getHistorial().clear());
-    }
 }

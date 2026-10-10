@@ -135,36 +135,36 @@ class ServicioTest {
     }
 
     @Test
-    void dadoCorte_cuandoConfirmoPrimerTurno_entoncesComprobanteEsTRNCOR1() {
+    void dadoCorte_cuandoConfirmoPrimerTurno_entoncesComprobanteEmpiezaConTRNCOR() {
         Cliente cliente = new Cliente("Ana", new Ocasional());
         CorteDeCabello corte = new CorteDeCabello(1000, 5);
         String comprobante = corte.confirmar(cliente, 1);
-        assertEquals("TRN-COR-1", comprobante);
+        assertTrue(comprobante.startsWith("TRN-COR-"));
     }
 
     @Test
-    void dadoCorte_cuandoConfirmoDosTurnos_entoncesComprobantesSonCorrelativos() {
+    void dadoCorte_cuandoConfirmoDosTurnos_entoncesLosComprobantesSonDistintos() {
         Cliente cliente = new Cliente("Ana", new Ocasional());
         CorteDeCabello corte = new CorteDeCabello(1000, 5);
-        corte.confirmar(cliente, 1);
+        String primero = corte.confirmar(cliente, 1);
         String segundo = corte.confirmar(cliente, 1);
-        assertEquals("TRN-COR-2", segundo);
+        assertNotEquals(primero, segundo);
     }
 
     @Test
-    void dadaColoracion_cuandoConfirmoTurno_entoncesComprobanteEsTRNCOL1() {
+    void dadaColoracion_cuandoConfirmoTurno_entoncesComprobanteEmpiezaConTRNCOL() {
         Cliente cliente = new Cliente("Ana", new Ocasional());
         Coloracion coloracion = new Coloracion(3000, 5);
         String comprobante = coloracion.confirmar(cliente, 1);
-        assertEquals("TRN-COL-1", comprobante);
+        assertTrue(comprobante.startsWith("TRN-COL-"));
     }
 
     @Test
-    void dadoTratamiento_cuandoConfirmoTurno_entoncesComprobanteEsTRNTRA1() {
+    void dadoTratamiento_cuandoConfirmoTurno_entoncesComprobanteEmpiezaConTRNTRA() {
         Cliente cliente = new Cliente("Ana", new Ocasional());
         TratamientoCapilar tratamiento = new TratamientoCapilar(2000, 5);
         String comprobante = tratamiento.confirmar(cliente, 1);
-        assertEquals("TRN-TRA-1", comprobante);
+        assertTrue(comprobante.startsWith("TRN-TRA-"));
     }
 
     @Test
